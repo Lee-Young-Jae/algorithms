@@ -1,0 +1,3 @@
+let solution = (a, b) => (b + b).indexOf(a);
+
+// 현업에서 가끔 쓰는 패턴...
