@@ -16,7 +16,6 @@ function solution(babbling) {
 
   babbling.forEach((item) => {
     if (jocaDic.includes(item)) {
-      console.log(item);
       answer += 1;
     }
   });
