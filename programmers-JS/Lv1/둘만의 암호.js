@@ -52,7 +52,7 @@ function solution(s, skip, index) {
           alphabetNumber = 1;
         }
       }
-      iif (isOverAlphabet(alphabetNumber)) {
+      if (isOverAlphabet(alphabetNumber)) {
         alphabetNumber = 1;
       }
     }
@@ -60,7 +60,6 @@ function solution(s, skip, index) {
       (key) => alphabetDic[key] === alphabetNumber
     );
   });
-
   return answer;
 }
 
