@@ -1,8 +1,8 @@
 function solution(cards1, cards2, goal) {
   let c1 = 0;
   let c2 = 0;
-  let c1Max = cards1.length;
-  let c2Max = cards2.length;
+  const c1Max = cards1.length;
+  const c2Max = cards2.length;
 
   for (let i = 0; i < goal.length; i++) {
     if (c1 < c1Max && cards1[c1] === goal[i]) {
