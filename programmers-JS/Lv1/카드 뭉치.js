@@ -1,35 +1,19 @@
 function solution(cards1, cards2, goal) {
-  let answer = "No";
+  let c1 = 0;
+  let c2 = 0;
+  let c1Max = cards1.length;
+  let c2Max = cards2.length;
 
-  let currentWord = "";
-
-  while (goal.length > 0) {
-    if (cards1.length === 0 && cards2.length === 0) {
-      break;
-    }
-
-    currentWord = goal[0];
-
-    if (cards1[0] === currentWord) {
-      cards1.shift();
-      goal.shift();
-    } else if (cards2[0] === currentWord) {
-      cards2.shift();
-      goal.shift();
+  for (let i = 0; i < goal.length; i++) {
+    if (c1 < c1Max && cards1[c1] === goal[i]) {
+      c1++;
+    } else if (c2 < c2Max && cards2[c2] === goal[i]) {
+      c2++;
     } else {
-      if (cards1.length > 0) {
-        cards1.shift();
-      } else if (cards2.length > 0) {
-        cards2.shift();
-      }
+      return "No";
     }
   }
-
-  if (goal.length === 0) {
-    answer = "Yes";
-  }
-
-  return answer;
+  return "Yes";
 }
 
 console.log(
