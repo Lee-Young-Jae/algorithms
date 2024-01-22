@@ -1,11 +1,20 @@
 function solution(numbers) {
-  const queue = [...numbers].slice(1, numbers.length);
-  return numbers.map((number, index) => {
-    const 가까운큰수 = queue.find((item) => item > number);
-    queue.shift();
-    if (!가까운큰수) return -1;
-    return 가까운큰수;
+  const stack = [];
+  const result = Array(numbers.length).fill(-1);
+
+  numbers.forEach((number) => {
+    if (number > stack.at(-1)) {
+      let backTrackingIdx = 1;
+      while (number > stack.at(-backTrackingIdx)) {
+        if (result.at(stack.length - backTrackingIdx) === -1)
+          result[stack.length - backTrackingIdx] = number;
+        backTrackingIdx++;
+      }
+    }
+    stack.push(number);
   });
+
+  return result;
 }
 
 console.log(solution([2, 3, 3, 5])); // [3, 5, 5, -1]
