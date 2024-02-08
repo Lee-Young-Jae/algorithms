@@ -1,32 +1,15 @@
-const dfs = (graph, start) => {
-  const stack = [];
-  stack.push([start, graph[0][start], 1]);
-  const graphLen = graph.length;
-
-  const result = [];
-  while (stack.length) {
-    const [rowIndex, sum, colIndex] = stack.pop();
-
-    if (colIndex === graphLen) {
-      result.push(sum);
-      continue;
-    }
-
-    for (let i = 0; i < 4; i++) {
-      if (i === rowIndex) continue;
-      stack.push([i, graph[colIndex][i] + sum, colIndex + 1]);
-    }
-  }
-
-  return result;
-};
-
 function solution(land) {
-  let result = 0;
-  for (let i = 0; i < 4; i++) {
-    result = Math.max(result, ...dfs(land, i));
+  const dp = Array.from({ length: land.length }, () => Array(4).fill(0));
+  dp[0] = land[0];
+  for (let i = 0; i < land.length - 1; i++) {
+    for (let j = 0; j < 4; j++)
+      for (let k = 0; k < 4; k++) {
+        if (j === k) continue;
+        const temp = dp[i][j] + land[i + 1][k];
+        if (temp > dp[i + 1][k]) dp[i + 1][k] = temp;
+      }
   }
-  return result;
+  return Math.max(...dp.at(-1));
 }
 
 console.log(
@@ -43,3 +26,12 @@ console.log(
     [4, 3, 2, 1],
   ])
 ); // 107
+
+console.log(
+  solution([
+    [0, 1, 0, 0],
+    [0, 100, 0, 0],
+    [0, 0, 0, 0],
+    [1, 2, 3, 5],
+  ])
+); // 105
